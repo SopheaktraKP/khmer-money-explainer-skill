@@ -6,6 +6,12 @@ Example topics: renting vs buying, salary and debt, franchise vs your own brand,
 
 Videos are rendered with [Remotion](https://www.remotion.dev/) and voiced with [KiriTTS](https://www.kiritts.com/).
 
+## Sample video
+
+[![Sample video made with this skill. Click to watch on YouTube](https://img.youtube.com/vi/aZryCDaRP50/hqdefault.jpg)](https://www.youtube.com/watch?v=aZryCDaRP50)
+
+▶️ [Watch on YouTube](https://www.youtube.com/watch?v=aZryCDaRP50)
+
 ## What the skill does
 
 1. **Topic**: suggests topics people in Cambodia recognise, with numbers that can be sourced and a twist.
