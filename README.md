@@ -18,10 +18,22 @@ Videos are rendered with [Remotion](https://www.remotion.dev/) and voiced with [
 2. **Research and arithmetic**: uses primary Cambodian sources (NBC, NIS, bank rate sheets) and a `calc.py` that produces every number shown on screen.
 3. **Script**: writes a Khmer script of about 100-120 beats with a fixed structure: hook, setup, both sides, result, risks, close. Voicing starts only after you approve it.
 4. **Look test**: renders still frames and checks them before any TTS credits are spent.
-5. **Voice**: voices one KiriTTS clip per beat, so fixing a wrong word only costs one sentence.
+5. **Voice**: voices one KiriTTS clip per beat, with **a separate voice for the narrator and each character** (for example narrator `Maly`, Neang `Neary`, Bora `Dara`). Fixing a wrong word costs one sentence, and recasting a character only re-voices their lines.
 6. **Timeline, sound and render**: builds the timeline, mixes music and sound effects, then renders an H.264 video and a thumbnail.
 7. **QA**: reports black or frozen frames and loudness, and checks every on-screen number against the calculations.
 8. **Deliver**: writes a Khmer YouTube description with chapters, sources, assumptions and a not-financial-advice line.
+
+## Voices for narrator and characters
+
+Set the cast in `script.json`, and mark who says each line:
+
+```json
+"voices": { "narrator": "Maly", "neang": "Neary", "bora": "Dara" },
+...
+{ "id": "h2a", "speaker": "neang", "text": "ខ្ញុំលេងតុង ព្រោះចំណេញច្រើនជាង!" }
+```
+
+Beats without a `speaker` are the narrator's. Any KiriTTS voice works, including your cloned voices. Each speaker is levelled to the same loudness in the final mix, and a character's mouth moves only on their own lines.
 
 ## Channel principles
 

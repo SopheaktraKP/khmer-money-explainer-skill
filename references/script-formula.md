@@ -25,6 +25,16 @@
 - **Keep the tone calm and friendly,** like a smart older sibling. Never mock either character. Avoid get-rich language and avoid fear-mongering.
 - **Plant the callback in the hook** and pay it off at the end.
 
+## Character lines
+
+The narrator explains; the characters live the decision. A character line is something the person would really say, in their own voice and in the first person: "ខ្ញុំលេងតុង ព្រោះចំណេញច្រើនជាង!" not a fact about tontines.
+
+- **Numbers stay with the narrator.** A character can say "I made money!", and the narrator says how much. That keeps every figure in one calm, checkable voice.
+- **Short and spoken.** One sentence, under about 60 characters, in casual Khmer, the way people talk at the market, not how they write.
+- **Use them where a person would speak:** stating their choice in the setup, the moment of good or bad news, a phone call from family, the closing "which one are you?". Around one beat in six or eight.
+- **Give each character a consistent way of talking** that fits who they are: Neang upbeat and quick, Bora careful. The voice and the words should match.
+- **The narrator introduces the speaker first,** so the first time a new voice is heard, the viewer already knows whose it is.
+
 ## Khmer writing
 
 - Prefer plain spoken Khmer over formal or translated phrasing. If a term is commonly said in English (franchise, Subscribe), the spoken English word is fine.

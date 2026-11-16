@@ -35,6 +35,8 @@ export type SceneCtx = {
   end: (beat: string) => number;
   /** True while one of these beats is being spoken: drive mouths with it. */
   speaking: (...beats: string[]) => boolean;
+  /** True while this speaker (an id from "voices" in script.json) is speaking a beat of this scene. */
+  talking: (speaker: string) => boolean;
 };
 export const SceneContext = createContext<SceneCtx | null>(null);
 export const useScene = () => {

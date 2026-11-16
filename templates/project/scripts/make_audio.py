@@ -136,13 +136,18 @@ music[-fade:] *= np.linspace(1, 0, fade)
 music[:int(.3 * SR)] *= np.linspace(0, 1, int(.3 * SR))
 
 # ---------- Voice ----------
+# Each speaker's clips are levelled on their own track: KiriTTS voices differ in loudness, and one level for
+# the whole voice track would leave a quiet character under a louder narrator.
 voice = np.zeros(N)
 if '--no-voice' not in sys.argv:
+    tracks = {}
     for b in tl['beats']:
         raw = subprocess.run(['ffmpeg', '-v', 'error', '-i', f"voice/{b['id']}.mp3", '-ac', '1', '-ar', str(SR), '-f', 'f32le', '-'], capture_output=True).stdout
-        place(voice, np.frombuffer(raw, np.float32).astype(np.float64), b['start'] / tl['fps'])
-    rms = np.sqrt(np.mean(voice[np.abs(voice) > 1e-3] ** 2))
-    voice *= db(-19) / rms
+        track = tracks.setdefault(b.get('speaker', 'narrator'), np.zeros(N))
+        place(track, np.frombuffer(raw, np.float32).astype(np.float64), b['start'] / tl['fps'])
+    for track in tracks.values():
+        rms = np.sqrt(np.mean(track[np.abs(track) > 1e-3] ** 2))
+        voice += track * db(-19) / rms
 
 # ---------- SFX placement ----------
 fx = np.zeros(N)

@@ -14,13 +14,14 @@ export const CHANNEL = '';
 export const CHAPTERS = ['', 'តុងជាអ្វី?', 'ដេញថ្លៃ៖ លុយមកពីណា?'];
 
 // ---------- Cast: one definition each, so a character looks identical in every scene ----------
+// Speaking characters also have an id in "voices" in script.json; pass talking={talking('<id>')} so their mouth moves.
 const Neang = (p: Partial<FigureProps> & {x: number}) => <Figure color={C.teal} hair="long" seed={1} {...p} />;
 const Bora = (p: Partial<FigureProps> & {x: number}) => <Figure color={C.sky} stripes hair="spiky" seed={2} {...p} />;
 const Organizer = (p: Partial<FigureProps> & {x: number}) => <Figure color={C.plum} hair="bun" glasses seed={3} {...p} />;
 const Vendor = (p: Partial<FigureProps> & {x: number}) => <Figure color={C.sun} hair="cap" seed={4} {...p} />;
 
 const Hook: React.FC = () => {
-  const {f, at, speaking} = useScene();
+  const {f, at, talking} = useScene();
   const bad = at('h5');
   const neangX = kf(f, [[0, 620], [at('h2'), 520]], 16);
   const boraX = kf(f, [[0, 1300], [at('h2', .5), 1180]], 16);
@@ -30,11 +31,11 @@ const Hook: React.FC = () => {
       <Show at={at('h2', .1)} out={at('h6')} x={190} y={900} from="left"><Stall /></Show>
       <Show at={at('h2', .1)} out={at('h6')} x={190} y={610}><Chip text="តុង" bg={C.sunSoft} size={44} /></Show>
       <Show at={at('h2', .6)} out={at('h6')} x={1590} y={900} from="right"><Bank label="ធនាគារ" /></Show>
-      <Neang x={neangX} walking={f > at('h2') && f < at('h2') + 16} talking={false}
-        pose={step(f, [[0, 'wave'], [at('h1', .3), 'down'], [at('h4', .4), 'up'], [bad, 'headGrab'], [at('h6'), 'down']])}
+      <Neang x={neangX} walking={f > at('h2') && f < at('h2') + 16} talking={talking('neang')}
+        pose={step(f, [[0, 'wave'], [at('h1', .3), 'down'], [at('h2a', .1), 'pointL'], [at('h2b'), 'down'], [at('h4', .4), 'up'], [bad, 'headGrab'], [at('h6'), 'down']])}
         face={step(f, [[0, 'smile'], [at('h4', .4), 'star'], [bad, 'shock'], [at('h6'), 'think']])} />
-      <Bora x={boraX} walking={f > at('h2', .5) && f < at('h2', .5) + 16}
-        pose={step(f, [[0, 'down'], [at('h1', .2), 'wave'], [at('h1', .5), 'down'], [at('h3', .6), 'hips']])}
+      <Bora x={boraX} walking={f > at('h2', .5) && f < at('h2', .5) + 16} talking={talking('bora')}
+        pose={step(f, [[0, 'down'], [at('h1', .2), 'wave'], [at('h1', .5), 'down'], [at('h2b', .1), 'pointR'], [at('h3'), 'down'], [at('h3', .6), 'hips']])}
         face={step(f, [[0, 'smile'], [at('h4', .4), 'neutral'], [bad, 'shock'], [at('h6'), 'think']])} />
       <Show at={at('h3', .6)} out={at('h6')} x={1180} y={350}><Tag text={`+${money(N.bank_net)}`} kind="gain" size={58} /></Show>
       <Show at={at('h4', .4)} out={bad} x={520} y={300}><Tag text={`+${money(N.last_gain)}`} kind="gain" size={84} /></Show>
@@ -43,7 +44,6 @@ const Hook: React.FC = () => {
       {[0, 4, 9, 14, 19].map((d, i) => <FlyingMoney key={i} kind="bill" at={bad + 12 + d} dur={34} from={[520, 560]} to={[-60 + i * 30, 180 + i * 40]} arc={70} />)}
       <Show at={at('h6', .05)} x={960} y={250}><Title text="តុង ឬ ធនាគារ?" size={120} mark /></Show>
       <Show at={at('h6', .05)} x={850} y={640}><VsBadge scale={.9} /></Show>
-      {speaking('h6') && null}
     </Stage>
   );
 };
@@ -129,7 +129,7 @@ const Bid: React.FC = () => {
 
 export const SCENES = {Hook, What, Bid};
 
-const STILL_CTX = {f: 200, fps: 30, dur: 400, at: () => 0, end: () => 400, speaking: () => false};
+const STILL_CTX = {f: 200, fps: 30, dur: 400, at: () => 0, end: () => 400, speaking: () => false, talking: () => false};
 /** 16:9 thumbnail: rendered at 1920x1080, then downscale to 1280x720 for upload. */
 export const Thumbnail: React.FC = () => (
   <SceneContext.Provider value={STILL_CTX}>

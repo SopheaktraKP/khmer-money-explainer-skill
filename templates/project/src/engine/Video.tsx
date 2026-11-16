@@ -7,7 +7,7 @@ import {ChapterBar} from './Stage';
 import {C} from './theme';
 
 type Word = {w: string; s: number; e: number};
-type Beat = {id: string; scene: string; start: number; end: number; words?: Word[]};
+type Beat = {id: string; scene: string; speaker?: string; start: number; end: number; words?: Word[]};
 type SceneRow = {id: string; start: number; end: number; chapter: number};
 const BEATS = timeline.beats as Beat[];
 const WIPE = 12;
@@ -33,6 +33,7 @@ const SceneRunner: React.FC<{row: SceneRow}> = ({row}) => {
     },
     end: (id) => find(id).end - row.start,
     speaking: (...ids) => ids.some((id) => { const b = find(id); return f >= b.start - row.start && f < b.end - row.start; }),
+    talking: (speaker) => beats.some((b) => (b.speaker ?? 'narrator') === speaker && f >= b.start - row.start && f < b.end - row.start),
   };
   const Comp = (SCENES as Record<string, React.FC>)[row.id];
   if (!Comp) throw new Error(`No scene component named ${row.id} in story.tsx`);
